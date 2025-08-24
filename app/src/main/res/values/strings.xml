@@ -4,4 +4,28 @@
     <string name="password">Password</string>
     <string name="login">Log In</string>
     <string name="singup">Sign Up</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="country">Country</string>
+    <string-array name="countries">
+        <item>Egypt</item>
+        <item>Saudi Arabia</item>
+        <item>United Arab Emirates</item>
+        <item>Kuwait</item>
+        <item>Qatar</item>
+        <item>Bahrain</item>
+        <item>Oman</item>
+        <item>Jordan</item>
+        <item>Lebanon</item>
+        <item>Iraq</item>
+        <item>Syria</item>
+        <item>Yemen</item>
+        <item>Morocco</item>
+        <item>Tunisia</item>
+        <item>Algeria</item>
+        <item>Libya</item>
+        <item>Sudan</item>
+        <item>Palestine</item>
+    </string-array>
 </resources>
