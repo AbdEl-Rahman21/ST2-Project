@@ -38,6 +38,7 @@
             android:inputType="textPassword" />
 
         <RadioGroup
+            android:id="@+id/genderGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -53,6 +54,7 @@
                 android:id="@+id/MaleButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="@string/male" />
 
             <RadioButton
