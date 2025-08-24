@@ -21,9 +21,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/spotifyl" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="90dp"/>
+
         <EditText
             android:id="@+id/loginUsername"
-            android:layout_width="match_parent"
+            android:layout_width="333dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/username"
@@ -31,7 +40,7 @@
 
         <EditText
             android:id="@+id/loginPassword"
-            android:layout_width="match_parent"
+            android:layout_width="333dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/password"
@@ -39,15 +48,31 @@
 
         <Button
             android:id="@+id/loginButton"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#22D762"
+            android:text="@string/login"
+            android:textColorLink="#20D761" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="130dp"/>
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login" />
+            android:text="Don't have an account? \n Press sign up to create a new account"
+            android:textAlignment="center" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
 
         <Button
             android:id="@+id/signupButton"
-            android:layout_width="match_parent"
+            android:layout_width="234dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="#20D761"
             android:text="@string/singup" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

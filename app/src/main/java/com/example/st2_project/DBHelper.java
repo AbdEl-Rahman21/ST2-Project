@@ -1,6 +1,6 @@
 package com.example.st2_project;
 
-//import android.content.ContentValues;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,14 +23,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists user");
+        db.execSQL("DROP TABLE IF EXISTS user");
         onCreate(db);
     }
 
     public User getUser(String username, String password) {
         db = getReadableDatabase();
 
-        //String[] rowDetails = {"id", "username", "password", "gender", "country"};
         String whereClause = "username = ? AND password = ?";
         String[] whereArgs = new String[] {username, password};
 
@@ -54,27 +53,21 @@ public class DBHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    /*public void createNew(String name) {
-        ContentValues row = new ContentValues();
-        row.put("name", name);
-        movieDatabase = getWritableDatabase();
-        // NullColumnHack here means that if the ContentValues is empty, the database will insert a row with NULL values.
-        movieDatabase.insert("movie", null, row);
-        movieDatabase.close();
+    public void addUser(User user) {
+        db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("username", user.getUsername());
+        values.put("password", user.getPassword());
+        values.put("gender", user.getGender());
+        values.put("country", user.getCountry());
+
+        db.insert("user", null, values);
+
+        db.close();
     }
 
-    public Cursor fetchAll() {
-        movieDatabase = getReadableDatabase();
-        String[] rowDetails = {"name", "id"};
-        Cursor cursor = movieDatabase.query("movie", rowDetails, null,
-                null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-        movieDatabase.close();
-        return cursor;
-    }
-
-    public void updateOne(int movieId, String newMovieName) {
+    /*public void updateOne(int movieId, String newMovieName) {
         movieDatabase = getWritableDatabase();
         ContentValues row = new ContentValues();
         row.put("name", newMovieName);

@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignupActivity">
+    tools:context=".SignupActivity"
+    >
 
     <LinearLayout
         android:layout_width="409dp"
@@ -21,9 +22,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="188dp"
+            app:srcCompat="@drawable/spotifyl" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Create new account"
+            android:textAlignment="center"
+            android:textColor="#20D761"
+            android:textStyle="bold"
+            android:textSize="28sp"></TextView>
+
         <EditText
             android:id="@+id/signupUsername"
-            android:layout_width="match_parent"
+            android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/username"
@@ -31,15 +48,19 @@
 
         <EditText
             android:id="@+id/signupPassword"
-            android:layout_width="match_parent"
+            android:layout_width="368dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword" />
-
-        <RadioGroup
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="20dp"/>
+        <RadioGroup
+            android:id="@+id/genderGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp">
 
             <TextView
                 android:id="@+id/textView"
@@ -52,35 +73,54 @@
             <RadioButton
                 android:id="@+id/MaleButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/male" />
+                android:layout_height="30dp"
+                app:buttonTint="@drawable/radio_button_selector"
+
+                android:checked="true"
+                android:text="@string/male"
+                android:textColor="#000000" />
 
             <RadioButton
                 android:id="@+id/FemaleButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/female" />
+                android:layout_height="30dp"
+                app:buttonTint="@drawable/radio_button_selector"
+                android:text="@string/female"
+                android:textColor="#000000"/>
 
         </RadioGroup>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/country"
+            android:paddingLeft="8dp"
+            android:text="Region"
             android:textSize="20sp"
             android:textStyle="bold" />
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
         <Spinner
             android:id="@+id/countrySpinner"
             android:layout_width="match_parent"
+            android:paddingLeft="8dp"
             android:layout_height="wrap_content"
             android:entries="@array/countries" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
 
         <Button
             android:id="@+id/registerButton"
-            android:layout_width="match_parent"
+            android:layout_width="267dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="#20D761"
             android:text="@string/singup" />
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

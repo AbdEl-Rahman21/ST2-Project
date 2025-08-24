@@ -17,6 +17,13 @@ public class User implements Serializable {
         this.country = country;
     }
 
+    public User(String username, String password, String gender, String country) {
+        this.username = username;
+        this.password = password;
+        this.gender = gender;
+        this.country = country;
+    }
+
     public int getId() {
         return id;
     }
