@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.ST2Project" parent="Base.Theme.ST2Project" />
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#1DB954</item>
+    </style>
+
 </resources>

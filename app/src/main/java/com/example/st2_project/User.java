@@ -2,7 +2,7 @@ package com.example.st2_project;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User {
     private int id = 0;
     private String username = "";
     private String password = "";

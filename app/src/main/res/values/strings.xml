@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ST2-Project</string>
+    <string name="app_name">Spotify</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Log In</string>
@@ -7,7 +7,7 @@
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="country">Country</string>
+    <string name="country">Region</string>
     <string-array name="countries">
         <item>Egypt</item>
         <item>Saudi Arabia</item>
@@ -28,4 +28,5 @@
         <item>Sudan</item>
         <item>Palestine</item>
     </string-array>
+    <string name="createlabel">Create new account</string>
 </resources>

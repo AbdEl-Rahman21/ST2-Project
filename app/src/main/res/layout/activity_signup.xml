@@ -23,7 +23,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="188dp"
             app:srcCompat="@drawable/spotifyl" />
@@ -31,12 +30,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:text="Create new account"
+            android:text="@string/createlabel"
             android:textAlignment="center"
             android:textColor="#20D761"
             android:textStyle="bold"
-            android:textSize="28sp"></TextView>
+            android:textSize="28sp" />
 
         <EditText
             android:id="@+id/signupUsername"
@@ -98,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-            android:text="Region"
+            android:text="@string/country"
             android:textSize="20sp"
             android:textStyle="bold" />
         <View

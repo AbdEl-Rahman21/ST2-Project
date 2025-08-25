@@ -41,8 +41,10 @@ public class LoginActivity extends AppCompatActivity {
             if (user == null) {
                 Toast.makeText(LoginActivity.this, "Invalid User Info!", Toast.LENGTH_LONG).show();
             } else {
+                App app = (App) getApplicationContext();
+                app.setCurrentUser(user);
+
                 /*Intent intent = new Intent(LoginActivity.this, MoviesListActivity.class);
-                intent.putExtra("user", user);
                 startActivity(intent);
                 finish();*/
             }
