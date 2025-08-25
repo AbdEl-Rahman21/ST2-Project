@@ -67,17 +67,30 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    /*public void updateOne(int movieId, String newMovieName) {
-        movieDatabase = getWritableDatabase();
-        ContentValues row = new ContentValues();
-        row.put("name", newMovieName);
-        movieDatabase.update("movie", row, "id='" + movieId + "'", null);
-        movieDatabase.close();
+    public void deleteUser(int userId) {
+        db = this.getWritableDatabase();
+
+        String whereClause = "id=?";
+        String[] whereArgs = new String[] {String.valueOf(userId)};
+
+        db.delete("user", whereClause, whereArgs);
+
+        db.close();
     }
 
-    public void deleteOne(int movieId) {
-        movieDatabase = getWritableDatabase();
-        movieDatabase.delete("movie", "id='" + movieId + "'", null);
-        movieDatabase.close();
-    }*/
+    public void editUser(int userId, User newUser) {
+        db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("username", newUser.getUsername());
+        values.put("password", newUser.getPassword());
+        values.put("country", newUser.getCountry());
+
+        String whereClause = "id=?";
+        String[] whereArgs = new String[] {String.valueOf(userId)};
+
+        db.update("user", values, whereClause, whereArgs);
+
+        db.close();
+    }
 }
