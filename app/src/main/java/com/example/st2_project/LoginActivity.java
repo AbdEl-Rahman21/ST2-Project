@@ -34,8 +34,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> {
             User user = db.getUser(
-                    username.getText().toString().trim(),
-                    password.getText().toString().trim()
+                    username.getText().toString(),
+                    password.getText().toString()
             );
 
             if (user == null) {
@@ -44,9 +44,9 @@ public class LoginActivity extends AppCompatActivity {
                 App app = (App) getApplicationContext();
                 app.setCurrentUser(user);
 
-                /*Intent intent = new Intent(LoginActivity.this, MoviesListActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ManageAccountActivity.class);
                 startActivity(intent);
-                finish();*/
+                finish();
             }
         });
 
@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         signupButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
-            finish();
         });
     }
 }

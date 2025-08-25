@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManageAccountActivity">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="188dp"
+            app:srcCompat="@drawable/spotifyl" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit/Delete Your Account"
+            android:textAlignment="center"
+            android:textColor="#20D761"
+            android:textStyle="bold"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/manageUsername"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/username"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/managePassword"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:text="@string/country"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <Spinner
+            android:id="@+id/manageCountrySpinner"
+            android:layout_width="match_parent"
+            android:paddingLeft="8dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/countries" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#20D761"
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF0000"
+            android:clickable="false"
+            android:text="Delete!" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
