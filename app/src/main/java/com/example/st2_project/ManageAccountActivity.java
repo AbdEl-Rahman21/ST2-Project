@@ -3,6 +3,7 @@ package com.example.st2_project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,7 @@ public class ManageAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_manage_account);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -46,7 +48,6 @@ public class ManageAccountActivity extends AppCompatActivity {
         for (int i = 0; i < countrySpinner.getCount(); i++) {
             if (countrySpinner.getItemAtPosition(i).toString().equals(user.getCountry())) {
                 countrySpinner.setSelection(i);
-
                 break;
             }
         }
@@ -61,7 +62,6 @@ public class ManageAccountActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-
         getMenuInflater().inflate(R.menu.context_menu, menu);
     }
 
@@ -70,7 +70,6 @@ public class ManageAccountActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_delete_account) {
             try {
                 DBHelper db = new DBHelper(getApplicationContext());
-
                 db.deleteUser(user.getId());
 
                 Toast.makeText(ManageAccountActivity.this, "Deletion Successful!", Toast.LENGTH_LONG).show();
@@ -82,7 +81,6 @@ public class ManageAccountActivity extends AppCompatActivity {
                 Toast.makeText(ManageAccountActivity.this, "Delete failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
-
         return true;
     }
 
@@ -96,12 +94,13 @@ public class ManageAccountActivity extends AppCompatActivity {
                 EditText password = findViewById(R.id.managePassword);
                 Spinner countrySpinner = findViewById(R.id.manageCountrySpinner);
 
-                User newUser = new User(username.getText().toString(), password.getText().toString(),
-                        "", countrySpinner.getSelectedItem().toString());
+                User newUser = new User(username.getText().toString(),
+                        password.getText().toString(),
+                        "",
+                        countrySpinner.getSelectedItem().toString());
 
                 try {
                     DBHelper db = new DBHelper(getApplicationContext());
-
                     db.editUser(user.getId(), newUser);
 
                     Toast.makeText(ManageAccountActivity.this, "Edit Successful!", Toast.LENGTH_LONG).show();
@@ -113,10 +112,28 @@ public class ManageAccountActivity extends AppCompatActivity {
                     Toast.makeText(ManageAccountActivity.this, "Edit failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
-
             return true;
         });
 
         popupMenu.show();
+    }
+
+    // ---------------------------
+    // ActionBar menu (Music List)
+    // ---------------------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.manage_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_music_list) {
+            Intent intent = new Intent(this, music.class); // your Music activity class
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

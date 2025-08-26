@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;              // ✅ Needed
+import android.view.MenuItem;         // ✅ Needed
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,24 @@ public class music extends AppCompatActivity {
     private ArrayList<String> songPaths = new ArrayList<>();
     private ArrayList<String> songNames = new ArrayList<>();
 
+    // ✅ This inflates the menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    // ✅ Handle menu clicks
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_manage_account) {
+            Intent intent = new Intent(this, ManageAccountActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +53,7 @@ public class music extends AppCompatActivity {
         recyclerViewSongs = findViewById(R.id.recyclerViewSongs);
         recyclerViewSongs.setLayoutManager(new LinearLayoutManager(this));
 
-        // طلب صلاحية
+        // Request permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_MEDIA_AUDIO}, 1);
@@ -58,9 +78,8 @@ public class music extends AppCompatActivity {
         });
 
         recyclerViewSongs.setAdapter(songAdapter);
-        DividerItemDecoration divider=new DividerItemDecoration(recyclerViewSongs.getContext(),DividerItemDecoration.VERTICAL);
+        DividerItemDecoration divider = new DividerItemDecoration(recyclerViewSongs.getContext(), DividerItemDecoration.VERTICAL);
         recyclerViewSongs.addItemDecoration(divider);
-
     }
 
     private void loadSongs() {
