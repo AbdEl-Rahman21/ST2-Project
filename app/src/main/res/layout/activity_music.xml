@@ -6,14 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background"
-    tools:context=".music">
+    tools:context=".music"
+    android:fitsSystemWindows="true">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSongs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/spotify"
 
         android:clipToPadding="false"
         android:padding="8dp" />

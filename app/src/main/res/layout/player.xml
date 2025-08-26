@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundshape"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
@@ -16,7 +15,7 @@
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:text="Song Title"
-        android:textColor="#fff"
+        android:textColor="#000"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -27,23 +26,23 @@
         android:gravity="center"
         android:text="Artist Name"
 
-        android:textColor="#fff"
+        android:textColor="#000"
         android:textSize="16sp" />
 
     <ImageView
         android:layout_width="310dp"
         android:layout_height="284dp"
         android:layout_marginTop="30dp"
-        android:src="@drawable/spotify" />
+        android:src="@drawable/spotifyl" />
 
     <SeekBar
         android:id="@+id/seekBarTime"
         android:layout_width="365dp"
         android:layout_height="41dp"
         android:layout_marginTop="30dp"
-        android:backgroundTint="#fff"
-        android:progressTint="#fff"
-        android:thumbTint="#fff" />
+        android:backgroundTint="#000"
+        android:progressTint="#000"
+        android:thumbTint="#000" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -54,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00:00"
-            android:textColor="#fff" />
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/tvDuration"
@@ -62,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="00:00"
-            android:textColor="#fff" />
+            android:textColor="#000" />
     </RelativeLayout>
 
     <!-- Control Buttons -->
@@ -78,7 +77,7 @@
             android:id="@+id/btnPrevious"
             android:layout_width="57dp"
             android:layout_height="62dp"
-            android:background="@drawable/previous"
+            android:background="@drawable/previous_song"
             android:contentDescription="Previous" />
 
         <Button
@@ -89,14 +88,15 @@
 
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/ic_play"
+            android:background="@drawable/pause"
+            android:backgroundTint="@null"
             android:contentDescription="Play" />
 
         <Button
             android:id="@+id/btnNext"
             android:layout_width="65dp"
             android:layout_height="58dp"
-            android:background="@drawable/next"
+            android:background="@drawable/next_song"
             android:contentDescription="Next"
             android:gravity="bottom" />
 
