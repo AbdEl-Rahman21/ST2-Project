@@ -3,6 +3,7 @@ package com.example.st2_project;
 import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -83,29 +84,42 @@ public class player extends AppCompatActivity {
         }
 
         String path = playlist.get(index);
-        mediaPlayer = new MediaPlayer();
 
         try {
-            mediaPlayer.setDataSource(path);
-            mediaPlayer.prepare();
+            if (path.startsWith("android.resource://")) {
+                // Handle raw resource songs
+                Uri uri = Uri.parse(path);
+                mediaPlayer = MediaPlayer.create(this, uri);
+            } else {
+                // Handle normal file paths
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setDataSource(path);
+                mediaPlayer.prepare();
+            }
+
             mediaPlayer.start();
             isPlaying = true;
             btnPlay.setBackgroundResource(R.drawable.ic_pause);
 
             // Update song metadata
-            MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-            retriever.setDataSource(path);
+            if (!path.startsWith("android.resource://")) {
+                MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+                retriever.setDataSource(path);
 
-            String title = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-            String artist = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+                String title = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+                String artist = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
 
-            if (title == null) title = "Unknown Title";
-            if (artist == null) artist = "Unknown Artist";
+                if (title == null) title = "Unknown Title";
+                if (artist == null) artist = "Unknown Artist";
 
-            textSongTitle.setText(title);
-            textSongArtist.setText(artist);
+                textSongTitle.setText(title);
+                textSongArtist.setText(artist);
 
-            retriever.release();
+                retriever.release();
+            } else {
+                textSongTitle.setText("Local Song");
+                textSongArtist.setText("Unknown Artist");
+            }
 
             // Update duration
             int duration = mediaPlayer.getDuration();

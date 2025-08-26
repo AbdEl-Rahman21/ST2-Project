@@ -8,8 +8,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.Menu;              // ✅ Needed
-import android.view.MenuItem;         // ✅ Needed
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,28 +22,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class music extends AppCompatActivity {
-
     private RecyclerView recyclerViewSongs;
     private SongAdapter songAdapter;
     private ArrayList<String> songPaths = new ArrayList<>();
     private ArrayList<String> songNames = new ArrayList<>();
 
-    // ✅ This inflates the menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_other);
+
+        menuItem.setOnMenuItemClickListener(item -> true);
+
         return true;
     }
 
-    // ✅ Handle menu clicks
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_manage_account) {
+        if (item.getItemId() == R.id.action_about) {
+            Toast.makeText(this, "This is an offline Spotify-like app!", Toast.LENGTH_SHORT).show();
+        } else if (item.getItemId() == R.id.action_manage_account) {
             Intent intent = new Intent(this, ManageAccountActivity.class);
             startActivity(intent);
-            return true;
+        } else {
+            finishAffinity();
         }
-        return super.onOptionsItemSelected(item);
+
+        return true;
     }
 
     @Override
@@ -68,6 +75,7 @@ public class music extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        loadAppSongs();
         loadSongs();
 
         songAdapter = new SongAdapter(this, songNames, index -> {
@@ -101,5 +109,13 @@ public class music extends AppCompatActivity {
             }
             cursor.close();
         }
+    }
+
+    private void loadAppSongs() {
+        songNames.add("Countdown");
+        songPaths.add("android.resource://" + getPackageName() + "/" + R.raw.countdown);
+
+        songNames.add("Tokyo Cafe");
+        songPaths.add("android.resource://" + getPackageName() + "/" + R.raw.tokyo_cafe);
     }
 }
