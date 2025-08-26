@@ -26,6 +26,9 @@ public class player extends AppCompatActivity {
 
     private boolean isPlaying = false;
 
+    private Thread seekBarThread;
+    private boolean isUpdating = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +55,10 @@ public class player extends AppCompatActivity {
         btnPlay.setOnClickListener(v -> {
             if (isPlaying) {
                 mediaPlayer.pause();
-                btnPlay.setBackgroundResource(R.drawable.ic_play);
+                btnPlay.setBackgroundResource(R.drawable.play);
             } else {
                 mediaPlayer.start();
-                btnPlay.setBackgroundResource(R.drawable.ic_pause);
+                btnPlay.setBackgroundResource(R.drawable.pause);
             }
             isPlaying = !isPlaying;
         });
@@ -127,20 +130,7 @@ public class player extends AppCompatActivity {
 
             // Seekbar update
             seekBarTime.setMax(duration);
-            new Thread(() -> {
-                while (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                    runOnUiThread(() -> {
-                        int currentPos = mediaPlayer.getCurrentPosition();
-                        seekBarTime.setProgress(currentPos);
-                        tvTime.setText(formatTime(currentPos));
-                    });
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
+            startSeekBarThread();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -160,5 +150,36 @@ public class player extends AppCompatActivity {
             mediaPlayer = null;
         }
         super.onDestroy();
+    }
+
+    private void startSeekBarThread() {
+        stopSeekBarThread(); // stop old one if exists
+        isUpdating = true;
+
+        seekBarThread = new Thread(() -> {
+            while (isUpdating && mediaPlayer != null) {
+                try {
+                    if (mediaPlayer.isPlaying()) {
+                        int currentPos = mediaPlayer.getCurrentPosition();
+                        runOnUiThread(() -> {
+                            seekBarTime.setProgress(currentPos);
+                            tvTime.setText(formatTime(currentPos));
+                        });
+                    }
+                    Thread.sleep(500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        seekBarThread.start();
+    }
+
+    private void stopSeekBarThread() {
+        isUpdating = false;
+        if (seekBarThread != null) {
+            seekBarThread.interrupt();
+            seekBarThread = null;
+        }
     }
 }
