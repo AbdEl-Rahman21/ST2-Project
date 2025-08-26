@@ -16,6 +16,12 @@
             android:name=".ManageAccountActivity"
             android:exported="false" />
         <activity
+            android:name=".music"
+            android:exported="false" />
+        <activity
+            android:name=".player"
+            android:exported="false" />
+        <activity
             android:name=".SignupActivity"
             android:exported="false" />
         <activity

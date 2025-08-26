@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                 App app = (App) getApplicationContext();
                 app.setCurrentUser(user);
 
-                Intent intent = new Intent(LoginActivity.this, ManageAccountActivity.class);
+                Intent intent = new Intent(LoginActivity.this, music.class);
                 startActivity(intent);
                 finish();
             }
