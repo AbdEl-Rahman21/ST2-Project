@@ -5,6 +5,8 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -78,6 +80,30 @@ public class player extends AppCompatActivity {
                 playSong(currentIndex);
             }
         });
+
+        // Show title on ActionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Music Player");
+        }
+    }
+
+    // Inflate menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.music_player_menu, menu);
+        return true;
+    }
+
+    // Handle menu item
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_music_list) {
+            Intent intent = new Intent(this, music.class);
+            startActivity(intent);
+            finish(); // close player
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void playSong(int index) {
@@ -90,11 +116,9 @@ public class player extends AppCompatActivity {
 
         try {
             if (path.startsWith("android.resource://")) {
-                // Handle raw resource songs
                 Uri uri = Uri.parse(path);
                 mediaPlayer = MediaPlayer.create(this, uri);
             } else {
-                // Handle normal file paths
                 mediaPlayer = new MediaPlayer();
                 mediaPlayer.setDataSource(path);
                 mediaPlayer.prepare();
@@ -102,9 +126,8 @@ public class player extends AppCompatActivity {
 
             mediaPlayer.start();
             isPlaying = true;
-            btnPlay.setBackgroundResource(R.drawable.ic_pause);
+            btnPlay.setBackgroundResource(R.drawable.pause);
 
-            // Update song metadata
             if (!path.startsWith("android.resource://")) {
                 MediaMetadataRetriever retriever = new MediaMetadataRetriever();
                 retriever.setDataSource(path);
@@ -124,11 +147,9 @@ public class player extends AppCompatActivity {
                 textSongArtist.setText("Unknown Artist");
             }
 
-            // Update duration
             int duration = mediaPlayer.getDuration();
             tvDuration.setText(formatTime(duration));
 
-            // Seekbar update
             seekBarTime.setMax(duration);
             startSeekBarThread();
 
@@ -153,7 +174,7 @@ public class player extends AppCompatActivity {
     }
 
     private void startSeekBarThread() {
-        stopSeekBarThread(); // stop old one if exists
+        stopSeekBarThread();
         isUpdating = true;
 
         seekBarThread = new Thread(() -> {
