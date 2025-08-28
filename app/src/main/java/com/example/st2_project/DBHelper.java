@@ -62,7 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("gender", user.getGender());
         values.put("country", user.getCountry());
 
-        db.insert("user", null, values);
+        db.insertOrThrow("user", null, values);
 
         db.close();
     }

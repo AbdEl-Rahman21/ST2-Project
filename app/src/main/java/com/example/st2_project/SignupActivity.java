@@ -28,8 +28,6 @@ public class SignupActivity extends AppCompatActivity {
             return insets;
         });
 
-        final DBHelper db = new DBHelper(getApplicationContext());
-
         final EditText username = findViewById(R.id.signupUsername);
         final EditText password = findViewById(R.id.signupPassword);
 
@@ -46,6 +44,8 @@ public class SignupActivity extends AppCompatActivity {
                     selectedRadio.getText().toString(), countrySpinner.getSelectedItem().toString());
 
             try {
+                DBHelper db = new DBHelper(getApplicationContext());
+
                 db.addUser(user);
 
                 Toast.makeText(SignupActivity.this, "Sign Up Successful!", Toast.LENGTH_LONG).show();
